@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ExamForScoolchildrenApp.Domain.Entities.Lesson>
+
+<h1>Dərslər</h1>
+<div class="card-header py-4">
+    <a asp-controller="Lesson" asp-action="Create" class="float-right btn btn-outline-secondary">Yeni Dərs Əlavə Et</a>
+</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+<div class="table-responsive">
+<table class="table table-bordered table-striped table-shorting">
+    <thead>
+        <tr>
+            <th>Dərsin adı</th>
+            <th>Dərsin kodu</th>
+            <th>Sinifi </th>
+            <th>Müəllimin adı </th>
+                <th>Müəlimin soyadı </th>
+                <th>Yenile  -  Sil </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lesson in Model)
+        {
+            <tr>
+                <td>@lesson.LessonName</td>
+                <td>@lesson.Id</td>
+                <td>@lesson.LessonClassNum.ToString()</td>
+                <td>@lesson.TeacherName</td>
+                <td>@lesson.TeacherSurname</td>
+                <td>
+                    <div style="display:flex">
+
+                            <a asp-controller="Lesson" asp-action="Update" style="margin: 5px 0px 0px 15px;" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@lesson.Id"></a>
+
+                            <a asp-controller="Lesson" asp-action="Delete" asp-route-id="@lesson.Id" class="btn text-danger" onclick="return confirm('Silmək istədiğinizdən əminmisiniz?')" style=" padding: 1px 0.75rem;     margin-left: 11px;"><i class="fas fa-fw fa-trash"></i></a>
+
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+            </div>
+        </div>
+    </div>
+</section>

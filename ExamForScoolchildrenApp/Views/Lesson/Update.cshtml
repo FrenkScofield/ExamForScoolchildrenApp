@@ -1,0 +1,39 @@
+﻿@model ExamForScoolchildrenApp.Domain.Entities.Lesson
+
+<h2> Dərs Güncelleyin</h2>
+<div class="card-header py-4">
+    <a asp-action="Index" class="float-right btn btn-outline-secondary">  Ana Səhifəyə Geri Git</a>
+</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+<form asp-action="Update" method="post">
+    <div class="form-group">
+        <label for="DersKodu">Dərsin Kodu</label>
+        <input type="text" class="form-control" id="DersKodu" asp-for="Id" disabled>
+    </div>
+    <div class="form-group">
+        <label for="DersAdi">Dərsin Adı</label>
+        <input type="text" class="form-control" id="DersAdi" asp-for="LessonName" required>
+    </div>
+    <div class="form-group">
+        <label for="Sinif">Sinif</label>
+        <input type="number" class="form-control" id="Sinif" asp-for="LessonClassNum" required>
+    </div>
+    <div class="form-group">
+        <label for="MuellimAdi">Müəllim Adı</label>
+        <input type="text" class="form-control" id="MuellimAdi" asp-for="TeacherName" required>
+    </div>
+    <div class="form-group">
+        <label for="MuellimSoyadi">Müəllim Soyadı</label>
+        <input type="text" class="form-control" id="MuellimSoyadi" asp-for="TeacherSurname" required>
+    </div>
+    <br/>
+                    <button type="submit" style="float:right" class="btn btn-primary">Güncelle</button>
+</form>
+
+            </div>
+        </div>
+    </div>
+</section>

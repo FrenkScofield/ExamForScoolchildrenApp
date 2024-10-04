@@ -1,0 +1,55 @@
+﻿@model ExamForScoolchildrenApp.Domain.ViewModels.ExamViewModel
+
+<h2>Yeni İmtahan Əlavə Et</h2>
+
+<div class="card-header py-4">
+    <a asp-action="Index" class="float-right btn btn-outline-secondary">  Ana Səhifəyə Geri Git</a>
+</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <form asp-action="Create" method="post">
+                    <div class="form-group">
+                        <label for="sel1" class="form-label">Dərsin kodu</label>
+                        <select class="form-select" id="sel1" asp-for="@Model.Exam.LessonId">
+                            <option value="0">Yeni Dərsin kodu secin </option>
+                            @foreach (var item in Model.Lessons)
+                            {
+                                <option value="@item.Id">@item.Id</option>
+
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1" class="form-label">Şagirdin nömrəsi</label>
+                        <select class="form-select" id="sel2" asp-for="@Model.Exam.StudentId">
+                            <option value="0">Yeni Şagirdin nömrəsi secin </option>
+                            @foreach (var item in Model.Students)
+                            {
+                                <option value="@item.Id">@item.Id</option>
+
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="İmtahan tarixi ">İmtahan tarixi </label>
+                        <input type="datetime-local" id="party" class="form-control" placeholder="Zəhmət olmasa  tarix seçin" value="@DateTime.Today" asp-for="@Model.Exam.ImtahanTarixi" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Qiyməti">Qiyməti</label>
+                        <input type="text" class="form-control" asp-for="@Model.Exam.Qiymeti" required>
+
+                    </div>
+
+                    <br />
+                    <button type="submit" style="float:right;" class="btn btn-success">Əlavə Et</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

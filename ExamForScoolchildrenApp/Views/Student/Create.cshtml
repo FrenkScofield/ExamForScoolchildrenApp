@@ -1,0 +1,35 @@
+﻿@model ExamForScoolchildrenApp.Domain.Entities.Student
+
+<h2>Yeni Şagird Əlavə Et</h2>
+
+<div class="card-header py-4">
+    <a asp-action="Index" class="float-right btn btn-outline-secondary">Ana Səhifəyə Geri Git</a>
+</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="Adı">Adı</label>
+        <input type="text" class="form-control"  asp-for="StudentName" required>
+    </div>
+    <div class="form-group">
+        <label for="Soyadı">Soyadı</label>
+        <input type="text" class="form-control" asp-for="StudentSurname" required>
+    </div>
+ @*   <div class="form-group">
+        <label for="Nömrəsi">Nömrəsi</label>
+        <input type="text" class="form-control"  asp-for="Id" required>
+    </div>*@
+    <div class="form-group">
+        <label for="Sinifi">Sinifi</label>
+        <input type="number" class="form-control"  asp-for="StudentClassNum" required>
+    </div>
+    <br/>
+    <button type="submit" style="float:right;" class="btn btn-success">Əlavə Et</button>
+</form>
+            </div>
+        </div>
+    </div>
+</section>

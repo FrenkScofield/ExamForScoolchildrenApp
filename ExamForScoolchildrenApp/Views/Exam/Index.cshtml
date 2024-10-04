@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ExamForScoolchildrenApp.Domain.Entities.Exam>
+
+<h1>İmtahanlar</h1>
+<div class="card-header py-4">
+    <a asp-action="Create" class="float-right btn btn-outline-secondary">Yeni İmtahan Əlavə Et</a>
+</div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-shorting">
+        <thead>
+            <tr>
+                <th>Dərsin kodu</th>
+                <th>Şagirdin nömrəsi </th>
+                <th>İmtahan tarixi </th>
+                <th>Qiyməti  </th>
+                <th>Yenile  -  Sil </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var exam in Model)
+            {
+                <tr>
+                    <td>@exam.LessonId</td>
+                    <td>@exam.StudentId.ToString()</td>
+                    <td>@exam.ImtahanTarixi</td>
+                    <td>@exam.Qiymeti</td>
+                    <td>
+                        <div style="display:flex">
+
+                            <a asp-controller="Exam" asp-action="Update" style="margin: 5px 0px 0px 15px;" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@exam.Id"></a>
+
+                            <a asp-controller="Exam" asp-action="Delete" asp-route-id="@exam.Id" class="btn text-danger" onclick="return confirm('Silmək istədiğinizdən əminmisiniz?')" style=" padding: 1px 0.75rem; margin-left: 11px"><i class="fas fa-fw fa-trash"></i></a>
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+            </div>
+        </div>
+    </div>
+</section>
