@@ -4,6 +4,7 @@ using ExamForScoolchildrenApp.Infrastructur.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamForScoolchildrenApp.Infrastructur.Migrations
 {
     [DbContext(typeof(ExamForScoolDBContext))]
-    partial class ExamForScoolDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241007214851_initial7")]
+    partial class initial7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

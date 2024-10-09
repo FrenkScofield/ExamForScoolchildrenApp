@@ -9,19 +9,146 @@
     <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ExamForScoolchildrenApp.styles.css" asp-append-version="true" />
+    <style>
+        header .signinAndSignup {
+            display: flex;
+        }
+
+            header .signinAndSignup .sign {
+                margin: 35px 10px 20px 0px;
+            }
+
+            header .signinAndSignup a {
+                color: #2a2a2a;
+                border: 1px solid #bbbebf;
+                font-size: 18px;
+                padding: 10px 26px;
+                outline: none;
+                font-weight: 700;
+                border-radius: 18px;
+                background-color: #a5ffde;
+            }
+
+            header .signinAndSignup p {
+                color: #2a2a2a;
+                border: 1px solid #bbbebf;
+                font-size: 18px;
+                padding: 10px 26px;
+                outline: none;
+                font-weight: 700;
+                border-radius: 18px;
+                background-color: #a5ffde;
+                margin-top: -12px;
+            }
+
+            header .signinAndSignup a:hover {
+                color: #ffffff;
+                border: 1px solid #858585;
+                background-color: #00d788;
+            }
+
+        header .navbar .col-4 {
+            text-align: center
+        }
+
+        header hr {
+            margin: 0px;
+        }
+
+        header .nav_li {
+            margin: 10px 5px;
+        }
+
+            header .nav_li a {
+                font-size: 25px;
+                font-weight: 500;
+            }
+
+                header .nav_li a:hover {
+                    color: #848cf3
+                }
+    </style>
 </head>
 <body>
     <header>
         <h1 class="display-4 text-center">PROSYS Məktəbinə Xoş Gəlmisiniz</h1>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Lesson" asp-action="Index">Dərslər</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Student" asp-action="Index">Şagirdlər</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Exam" asp-action="Index">İmtahanlar</a>
-               
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"></div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-6 intop signinAndSignup">
+                    <div class="signIn sign">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <p id=myInput>
+                                Welcome, @User.Identity.Name
+                            </p>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Signin"
+                               id=myInput>
+                                <i class="fas fa-unlock icon-top"></i>
+                                Sign In
+                            </a>
+                        }
+                    </div>
+                    <div class="signUp sign">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Account" asp-action="Signout" id=myInput>
+                                Sign out
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="RegisterUser"
+                               id=myInput>
+                                <i class="fas fa-pen-square icon-top"></i>
+                                Sign Up
+                            </a>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-6 intop">
+                </div>
             </div>
-        </nav>
+            <div class="row">
+                 @if (User.Identity.IsAuthenticated)
+                        {
+                <hr />
+                <div class="navbar">
+                    <div class=" col-6 ">
+
+                       
+                            <div class="row">
+                                <div class=" col-4 ">
+                                    <div class="nav_li">
+                                        <a class="navbar-brand" asp-controller="Lesson" asp-action="Index">Dərslər</a>
+                                    </div>
+                                </div>
+                                <div class=" col-4 ">
+                                    <div class="nav_li">
+                                        <a class="navbar-brand" asp-controller="Student" asp-action="Index">Şagirdlər</a>
+                                    </div>
+
+                                </div>
+                                <div class=" col-4 ">
+                                    <div class="nav_li">
+                                        <a class="navbar-brand" asp-controller="Exam" asp-action="Index">İmtahanlar</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                       
+                    </div>
+                </div>
+                <hr style="margin-bottom: 25px;" />
+                }
+            </div>
+
+        </div>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">

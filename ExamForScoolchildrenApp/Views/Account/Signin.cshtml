@@ -1,0 +1,63 @@
+﻿@model ExamForScoolchildrenApp.Domain.ViewModels.UserLoginModel 
+
+@{
+    ViewData["Title"] = "Signin";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-5">
+            <form class="form-horizontal" method="POST">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <fieldset>
+                    <div id="legend">
+                        <h3>İSTİFADƏÇİ GİRİSİ</h3>
+                    </div>
+
+                    <div class="control-group">
+                        <!-- Email -->
+                        <label class="control-label" asp-for="EmailOrUsername"></label>
+                        <div class="controls">
+                            <input asp-for="EmailOrUsername" class="input-xlarge form-control">
+                            <span asp-validation-for="EmailOrUsername" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="control-group">
+                        <!-- Password -->
+                        <label class="control-label" asp-for="Password"></label>
+                        <div class="controls">
+                            <input asp-for="Password" class="input-xlarge form-control">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    @*<div class="control-group">
+                        <!-- ConfirmPassword -->
+                        <label class="control-label d-inline" asp-for="RememberMe"> </label>
+                        <input asp-for="RememberMe" class="d-inline form-control">
+
+                    </div>*@
+
+                 @*   <a asp-controller="Account" asp-action="ForgotPassword" class="btn btn-link d-block my-4">
+                        Forgot Password?
+                    </a> *@
+                    <br/>
+                    <div class="control-group">
+                        <!-- Button -->
+                        <div class="controls">
+                            <button type="submit" class="btn btn-success">Signin</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}

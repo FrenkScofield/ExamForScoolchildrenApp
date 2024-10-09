@@ -20,10 +20,16 @@ namespace ExamForScoolchildrenApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var products = await _lessonService.GetLessonsAsync();
+            if (User.Identity.IsAuthenticated)
+            {
+                var products = await _lessonService.GetLessonsAsync();
 
-            return View(products);
-
+                return View(products);
+            }
+            else
+            {
+                return RedirectToAction("Signin", "Account");
+            }
         }
 
         //Create Lesson

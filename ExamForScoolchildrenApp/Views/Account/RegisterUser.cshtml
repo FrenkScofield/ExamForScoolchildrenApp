@@ -1,0 +1,78 @@
+﻿@model ExamForScoolchildrenApp.Domain.ViewModels.UserRegisterModel
+
+<head>
+    <link rel="stylesheet" href="~/site/register-view/css/style.css">
+    <link rel="stylesheet" href="~/site/register-view/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+</head>
+
+
+<section id="signup-page" style="padding: 30px 0">
+    <div class="container">
+        <div class="row">
+            <div class="signup-user">
+                <div class="inner">
+                    <form method="post" style="width:40%;">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <h3>İSTİFADƏÇİ QEYFIYAT</h3>
+                        <div class="form-group">
+                            <div class="form-wrapper">
+                                <label asp-for="Name" for="">* Adı</label>
+                                <input asp-for="Name" type="text" required class="form-control border-radius">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-wrapper">
+                                <label asp-for="Surname" for="">* Soyad</label>
+                                <input asp-for="Surname" type="text" required class="form-control border-radius">
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="form-wrapper">
+                            <label asp-for="UserName" for="">* Istifadeci Adi</label>
+                            <input asp-for="UserName" type="text" required class="form-control border-radius">
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-wrapper">
+                            <label asp-for="Address" for="">* Address</label>
+                            <input asp-for="Address" type="text" required class="form-control border-radius">
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="form-wrapper">
+                            <label asp-for="PhoneNumber" for="">* Telefon</label>
+                            <input asp-for="PhoneNumber" type="text" required class="form-control border-radius">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-wrapper">
+                            <label asp-for="Email" for="">* Email</label>
+                            <input asp-for="Email" type="email" required class="form-control border-radius">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-wrapper">
+                            <label asp-for="Password" for="">* Şifrə</label>
+                            <input asp-for="Password" type="password" required class="form-control border-radius">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-wrapper">
+                            <label asp-for="ConfirmPassword" for="">* Şifrəni təsdiqlə</label>
+                            <input asp-for="ConfirmPassword" type="password" required class="form-control ">
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <br/>
+                        <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+                                <button type="submit" class="btn btn-success">Register Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,12 +1,15 @@
 ﻿using ExamForScoolchildrenApp.Aplication.Services;
 using ExamForScoolchildrenApp.Domain.Entities;
 using ExamForScoolchildrenApp.Domain.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace ExamForScoolchildrenApp.Controllers
 {
+  
     [Route("Exam")]
     public class ExamController : Controller
     {
@@ -26,9 +29,16 @@ namespace ExamForScoolchildrenApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var exams = await _examService.GetExamsAsync();
-
+            if (User.Identity.IsAuthenticated)
+            { 
+                var exams = await _examService.GetExamsAsync();
+            
             return View(exams);
+            }
+            else
+            {
+                return RedirectToAction("Signin", "Account");
+            }
 
         }
         //Create Exam
@@ -51,7 +61,7 @@ namespace ExamForScoolchildrenApp.Controllers
         {
             if (viewModel.Exam.LessonId == 0 && viewModel.Exam.StudentId == 0)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Create));
             }
             await _examService.AddExamAsync(viewModel.Exam);
             return RedirectToAction(nameof(Index));

@@ -20,10 +20,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DAL\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
 </Project>

@@ -12,8 +12,8 @@
                 <form asp-action="Create" method="post">
                     <div class="form-group">
                         <label for="sel1" class="form-label">Dərsin kodu</label>
-                        <select class="form-select" id="sel1" asp-for="@Model.Exam.LessonId">
-                            <option value="0">Yeni Dərsin kodu secin </option>
+                        <select class="form-select" id="sel1" asp-for="@Model.Exam.LessonId" required>
+                            <option value="">Yeni Dərsin kodu secin </option>
                             @foreach (var item in Model.Lessons)
                             {
                                 <option value="@item.Id">@item.Id</option>
@@ -24,8 +24,8 @@
                     </div>
                     <div class="form-group">
                         <label for="sel1" class="form-label">Şagirdin nömrəsi</label>
-                        <select class="form-select" id="sel2" asp-for="@Model.Exam.StudentId">
-                            <option value="0">Yeni Şagirdin nömrəsi secin </option>
+                        <select class="form-select" id="sel2" asp-for="@Model.Exam.StudentId" required>
+                            <option value="">Yeni Şagirdin nömrəsi secin </option>
                             @foreach (var item in Model.Students)
                             {
                                 <option value="@item.Id">@item.Id</option>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <label for="Qiyməti">Qiyməti</label>
-                        <input type="text" class="form-control" asp-for="@Model.Exam.Qiymeti" required>
+                        <input type="number"value=""  class="form-control" asp-for="@Model.Exam.Qiymeti" required>
 
                     </div>
 
