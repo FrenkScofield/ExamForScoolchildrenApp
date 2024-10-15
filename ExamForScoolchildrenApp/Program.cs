@@ -27,6 +27,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<LessonService>();
 builder.Services.AddScoped<StudentService>();  // If you have similar services for Student and Exam
 builder.Services.AddScoped<ExamService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<SendEmailService>();
 builder.Services.AddControllers();
 
 // your EmailSender configuration section
@@ -61,7 +63,16 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 }).AddEntityFrameworkStores<ExamForScoolDBContext>()
        .AddDefaultTokenProviders();
 
+//Keeping user data in sessions
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); //standard session time is 20 minutes
+    options.Cookie.HttpOnly = true;
+    // allows to use the session cookie ,even if the user hasn't consented 
+    options.Cookie.IsEssential = true;
 
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -76,6 +87,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();// allow to manage user session data 
 
 app.UseAuthentication(); 
 app.UseAuthorization();

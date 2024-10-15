@@ -1,14 +1,10 @@
-﻿using ExamForScoolchildrenApp.Aplication.Interface;
-using ExamForScoolchildrenApp.Domain.Entities;
+﻿using ExamForScoolchildrenApp.Domain.Entities;
 using ExamForScoolchildrenApp.Domain.ViewModels;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ExamForScoolchildrenApp.Aplication.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.WebUtilities;
-using System.Text.Encodings.Web;
 using System.Text;
+using ExamForScoolchildrenApp.Aplication.Services;
 
 namespace ExamForScoolchildrenApp.Controllers
 {
@@ -16,17 +12,21 @@ namespace ExamForScoolchildrenApp.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IEmailSender _emailSender;
         private readonly UserManager<AppUser> _userManager;
+        private readonly UserService _userService;
+        private readonly SendEmailService _sendEmailService;
 
         public AccountController(
-                            IEmailSender emailSender,
                              UserManager<AppUser> userManager,
-                            SignInManager<AppUser> signInManager)
+                            SignInManager<AppUser> signInManager,
+                            UserService userService,
+                            SendEmailService sendEmailService
+                          )
         {
             _signInManager = signInManager;
-            _emailSender = emailSender;
             _userManager = userManager;
+           _userService = userService;
+            _sendEmailService = sendEmailService;  
         }
 
         [HttpGet("create")]
@@ -46,44 +46,9 @@ namespace ExamForScoolchildrenApp.Controllers
                 return View(registerViewModel);
             }
 
-            var user = new AppUser
-            {
+            await _userService.AddUserAsync(registerViewModel);
 
-                Name = registerViewModel.Name,
-                Surname = registerViewModel.Surname,
-                UserName = registerViewModel.UserName,
-                Email = registerViewModel.Email,
-                PhoneNumber = registerViewModel.PhoneNumber,
-                Address = registerViewModel.Address,
-                Password = registerViewModel.Password
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(user, registerViewModel.Password);
-
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-                return View(registerViewModel);
-            }
-
-            //email confirmation
-            //SMTP
-            string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-            //64 byte array conversion part
-            byte[] tokenGeneratedBytes = Encoding.UTF8.GetBytes(token);
-            var codeEncoded = WebEncoders.Base64UrlEncode(tokenGeneratedBytes);
-
-            await _emailSender.SendEmailAsync(registerViewModel.Email, "Conform your email",
-
-                 $"Confirm your account by following to " +
-                $"<a href='{HtmlEncoder.Default.Encode($"https://localhost:7032/Account/ConfirmEmail?token={codeEncoded}&userId={user.Id}")}'>" +
-                "this link" +
-                $"</a>");
-
+            await _sendEmailService.SendEmail();
 
             return View("VerifyEmail");
         }

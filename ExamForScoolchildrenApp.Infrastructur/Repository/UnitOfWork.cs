@@ -12,7 +12,6 @@ namespace ExamForScoolchildrenApp.Infrastructur.Repository
         private IGenericRepository<Student> _studentRepository;
         private IGenericRepository<Lesson> _lessonRepository;
         private IGenericRepository<Exam> _examRepository;
-       // private IGenericRepository<AppUser> _appUserRepository;
 
         public UnitOfWork(ExamForScoolDBContext context)
         {
@@ -22,7 +21,6 @@ namespace ExamForScoolchildrenApp.Infrastructur.Repository
         public IGenericRepository<Student> Students => _studentRepository ??= new GenericRepository<Student>(_context);
         public IGenericRepository<Lesson> Lessons => _lessonRepository ??= new GenericRepository<Lesson>(_context);
         public IGenericRepository<Exam> Exams => _examRepository ??= new GenericRepository<Exam>(_context);
-     //  public IGenericRepository<AppUser> AppUser => _appUserRepository ??= new GenericRepository<AppUser>(_context);
 
         public async Task<int> SaveChangesAsync()
         {
@@ -33,5 +31,6 @@ namespace ExamForScoolchildrenApp.Infrastructur.Repository
         {
             _context.Dispose();
         }
+
     }
 }
